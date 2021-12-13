@@ -6,11 +6,11 @@ import pandas as pd
 import fnmatch
 
 ##To Configure: Batchfiles' root path, and Filterfile must be excel.
-dirPath=r"C:\DevTest"
-dirFilterfile=r"C:\Temp\table_data.xlsx"
-filterFile_sheet_name="FilterList"
+dirPath = r"\\nasweucvot2001p.got.volvocars.net\C_9413_APP_NASsympathy01\data_srec_secret"
+dirFilterfile = r"\\nasweucvot2001p.got.volvocars.net\C_9413_APP_NASsympathy01\temp\table_data.xlsx"
+filterExcel_sheet_name = "CHINA CarID"
 
-def prepPattern(filterPath,excelsheet_name):
+def prepPattern(filterPath,excelsheet_name="Sheet1"):
     try:
         df_ref = pd.read_excel(filterPath, sheet_name=excelsheet_name)
     except:
@@ -35,7 +35,9 @@ def removeFilesByMatchingPattern(dirPath, pattern):
     return listOfFilesWithError
 
 def removeFilesByMatchingPattern_naive(dirPath, pattern):
-    #pattern: str, e.g. "TEST-*.xml"
+    #pattern: str, e.g. "TEST-*.xml" etc.
+        # '*' matches everything; '?' matches any single character,
+        # '[seq]' matches any character in seq; '[!seq]' matches any character not in seq.
     #dirPath: str
     listOfFilesWithError = []
     for parentDir, dirnames, filenames in os.walk(dirPath):
@@ -49,9 +51,13 @@ def removeFilesByMatchingPattern_naive(dirPath, pattern):
     return listOfFilesWithError
 
 if __name__ == '__main__':
-    print("Is dirFilter and excelfile existed :",str(os.path.exists(dirFilterfile)) )
-    ref_list= prepPattern(dirFilterfile, filterFile_sheet_name)
+    print("Is dirFilter and file existed :",str(os.path.exists(dirFilterfile)) )
+    ref_list= prepPattern(dirFilterfile, filterExcel_sheet_name)
     listOfErrors = removeFilesByMatchingPattern(dirPath, ref_list)
+
+    #ref_pattern = "Test_*.sydata"
+    #listOfErrors = removeFilesByMatchingPattern_naive(dirPath, ref_pattern)
+
     if len(listOfErrors)>1:
         print('Files that can not be deleted : ')
         for filePath in listOfErrors:
