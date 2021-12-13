@@ -55,7 +55,7 @@ if __name__=="__main__":
     df_batchcsv=mergeCsvBatchFiles(dirPath, rowheader=0)
     
     exportmergedFiles(df_batchexcel, dirPath, filename=exportfile_name, exportmode=exportformat)
-    exportmergedFiles(df_batchcsv, dirPath, filename=r"batch data from csv")
+    exportmergedFiles(df_batchcsv, dirPath, filename=r"batch data from csv", exportmode=exportformat)
     
     #Test-review
     df_review=pd.read_pickle(os.path.join(dirPath,"batch data from csv")+ exportformat )
