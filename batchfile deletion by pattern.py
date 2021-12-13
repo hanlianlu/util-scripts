@@ -52,7 +52,7 @@ def removeFilesByMatchingPattern_naive(dirPath, pattern):
 
 if __name__ == '__main__':
     print("Is dirFilter and file existed :",str(os.path.exists(dirFilterfile)) )
-    ref_list= prepPattern(dirFilterfile, filterExcel_sheet_name)
+    ref_list= prepPattern(dirFilterfile, excelsheet_name=filterExcel_sheet_name)
     listOfErrors = removeFilesByMatchingPattern(dirPath, ref_list)
 
     #ref_pattern = "Test_*.sydata"
