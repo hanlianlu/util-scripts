@@ -2,8 +2,8 @@ import os
 import pandas as pd
 import openpyxl
 
-#Configure the dirPath and corresponding excel sheets.
-#If it is merging excel, configure filesheet_name.
+#Configure the dirPath for file scanning, and configure the exportfile_name by needs.
+#If it is for merging excels, configure excelsheet_name.
 #Exported format is stored by default as pickle, you can specify to '.xlsx' or '.csv'.
 dirPath= r"C:\DevTest"
 exportfile_name = r"batch data"   
@@ -51,11 +51,11 @@ def exportmergedFiles(pd_batch, dirPath, exportmode='.pickle',filename=r"batch d
 
 if __name__=="__main__":
 
-    df_batchexcel=mergeExcelBatchFiles(dirPath, excelsheet_name, rowheader=2)
-    df_batchcsv=mergeCsvBatchFiles(dirPath)
+    df_batchexcel=mergeExcelBatchFiles(dirPath, excelsheet_name, rowheader=0)
+    df_batchcsv=mergeCsvBatchFiles(dirPath, rowheader=0)
     
     exportmergedFiles(df_batchexcel, dirPath, filename=exportfile_name, exportmode=exportformat)
-    exportmergedFiles(df_batchcsv,dirPath, filename=r"batch data from csv")
+    exportmergedFiles(df_batchcsv, dirPath, filename=r"batch data from csv")
     
     #Test-review
     df_review=pd.read_pickle(os.path.join(dirPath,"batch data from csv")+ exportformat )
