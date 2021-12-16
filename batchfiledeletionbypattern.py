@@ -4,10 +4,7 @@
 import os
 import pandas as pd
 import fnmatch
-from itertools import product
-from functools import reduce, partial
-
-from pandas.core.construction import is_empty_data
+import openpyxl
 
 ##To Configure: Batchfiles' root path, and Filterfile must be excel.
 #dirPath = r"\\nasweucvot2001p.got.volvocars.net\C_9413_APP_NASsympathy01\data_srec_secret"
